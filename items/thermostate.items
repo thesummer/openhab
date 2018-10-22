@@ -1,0 +1,6 @@
+
+Switch bedroomHeaterState "Bedroom heater state"
+
+Switch livingroomHeaterState "Living room heater state"
+
+Switch livingroomPreheat "Living room preheat"

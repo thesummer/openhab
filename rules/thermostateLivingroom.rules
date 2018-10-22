@@ -1,0 +1,77 @@
+var Timer disablePreheatTimer
+
+rule "Startup"
+when
+    System started
+then
+   livingroomTemperatureComfort.sendCommand(21.0)
+   livingroomTemperatureEco.sendCommand(16.0)
+end
+
+rule "Living room thermostate set state"
+when
+    Item JanOnline changed
+then
+    if (JanOnline.state == OPEN )
+    {
+        livingroomHeaterState.sendCommand(ON)
+    }
+    else
+    {
+        livingroomHeaterState.sendCommand(OFF)
+    }
+end
+
+rule "Living room enable preheat"
+when 
+    Item livingroomPreheat changed to ON
+then
+    livingroomHeaterState.sendCommand(ON)
+    logInfo("PreheatEnable", "Set heater to ON")
+    disablePreheatTimer = createTimer(now.plusHours(1),
+                       [| livingroomHeaterState.sendCommand(OFF)
+                          livingroomPreheat.sendCommand(OFF)
+                          logInfo("PreheatEnable", "Set heater to and switch to OFF") ])
+end
+
+rule "Living room disable preheat"
+when 
+    Item livingroomPreheat changed to OFF
+then
+    if (JanOnline.state == OPEN )
+    {
+        livingroomHeaterState.sendCommand(ON)
+        logInfo("PreheatDisable", "Setting heater to ON")
+    }
+    else
+    {
+        livingroomHeaterState.sendCommand(OFF)
+        logInfo("PreheatDisable", "Setting heater to OFF")
+    }
+end
+
+rule "Living room heater set temperature"
+when
+    Item livingroomHeaterState changed
+then
+    logInfo("LivingRoomTemp", "SetLRTemp started...")
+    if (livingroomHeaterState.state == ON)
+    {
+	logInfo("LivingroomTemp", "Set current set point to " + livingroomTemperatureComfort.state.toString()) 
+        living_room_thermostat_SetpointTemperature.sendCommand(livingroomTemperatureComfort.state)
+    }
+    else
+    {
+	logInfo("LivingroomTemp", "Set current set point to " + livingroomTemperatureEco.state.toString()) 
+        living_room_thermostat_SetpointTemperature.sendCommand(livingroomTemperatureEco.state)
+    }
+    logInfo("LivingRoomTemp", "SetLRTemp finished")
+end
+
+rule "LR thermostate night mode"
+when
+    Time cron "0 40 22 1/1 * ? *"
+then
+   logInfo("LRNight", "Set LR temperature to night mode")
+   livingroomHeaterState.sendCommand(OFF) 
+end

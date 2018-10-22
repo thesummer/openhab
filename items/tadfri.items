@@ -1,0 +1,16 @@
+Dimmer living_room_brightness "Living room brightness" { channel="tradfri:0100:ede9061e:65543:brightness" }
+
+Group bedroom_dimmers
+Dimmer bedroom_left_brightness "Bedroom left brightness" (bedroom_dimmers) { channel="tradfri:0220:ede9061e:65541:brightness" }
+Dimmer bedroom_right_brightness "Bedroom left brightness" (bedroom_dimmers){ channel="tradfri:0220:ede9061e:65542:brightness" }
+
+Group bedroom_colors
+Dimmer bedroom_left_color "bedroom_left_color" (bedroom_colors) ["Lighting"] { channel="tradfri:0220:ede9061e:65541:color_temperature" }
+Dimmer bedroom_right_color "bedroom_left_color" (bedroom_colors) ["Lighting"] { channel="tradfri:0220:ede9061e:65542:color_temperature" }
+
+
+Number dimmer_bedroom_battery_level "Dimmer bedroom battery level [%d %%]" { channel="tradfri:0820:ede9061e:65540:battery_level" }
+
+Number dimmer_livingroom_battery_level "Dimmer living room battery level [%d %%]" { channel="tradfri:0820:ede9061e:65537:battery_level" }
+
+Switch WakeupLightEnable "Wake-up light" 

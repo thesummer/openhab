@@ -1,0 +1,48 @@
+var Number brightness = 0
+val Number minutes = 15
+
+var Timer wakeUpTimer = null
+
+rule "Startup"
+when
+    System started
+then
+    brightness = 0
+end
+
+rule "Wake up light"
+when
+   Time cron "0 45 6 ? * MON-FRI *"
+then
+    logInfro("WakeUp", "WakeUp rule started")
+    val stepSize = (100+minutes-1) / minutes
+    logInfo("WakeUp", "Initial brightness " + bedroom_left_brightness.state.toString())
+    if (WakeupLightEnable.state == ON && bedroom_left_brightness.state == 0) 
+    {
+        brightness = 0 
+        wakeUpTimer = createTimer(now.plusSeconds(1),
+                      [
+                          // Stop timer when:
+                          // - brightness >= 100: reached full brightness
+                          // - In case rule turned off in between
+                          // - In case the brightness has been reduced in between
+                          if (brightness >= 100 || WakeupLightEnable.state == OFF || bedroom_left_brightness.state < brightness) 
+                          {
+                              wakeUpTimer = null
+                              brightness = 0
+			      logInfo("WakeUp", "WakeUp finished.")
+                          }
+                          else
+                          {
+                             brightness += stepSize
+                             if (brightness > 100)
+                             {
+                                 brightness = 100
+                             }
+
+                             bedroom_dimmers.sendCommand(brightness)
+                             wakeUpTimer.reschedule(now.plusSeconds(60))
+                          }
+                      ])
+    }
+end

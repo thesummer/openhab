@@ -1,0 +1,11 @@
+Switch Plant_Light "Plant Light" <light> (LR,gLight)  
+	 { mqtt=">[broker:cmnd/plant_light/power:command:*:default], 
+	   <[broker:stat/plant_light/POWER:state:default]" }
+
+Switch Plant_Light_Reachable "Plant Light: reachable" (gReachable)
+    { mqtt="< broker:tele/plant_light/LWT:state:MAP(reachable.map)]" }
+
+Number Plant_Light_RSSI "Plant Light: RSSI [%d %%]" (gRSSI)
+    { mqtt="<[broker:tele/plant-_light/STATE:state:JSONPATH($.Wifi.RSSI)]" }
+
+

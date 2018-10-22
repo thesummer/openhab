@@ -1,0 +1,15 @@
+
+rule "Plant Light on"
+when 
+    Time cron "0 0 7 1/1 * ? *"
+then
+    Plant_Light.sendCommand(ON)
+end
+
+
+rule "Plant Light off"
+when 
+    Time cron "0 0 23 1/1 * ? *"
+then
+    Plant_Light.sendCommand(OFF)
+end

@@ -1,0 +1,4 @@
+Switch MQTT_Test "Testing..." { mqtt="<[broker:testing/mqtt/topic:state:default], >[broker:testing/mqtt/back-topic:command:*:default]" }  
+// ^-- Item Type              ^-- Item linked Channel
+//         ^-- Item Name              ^-- Inbound MQTT configuration              ^-- Outbound MQTT configuration
+//                   ^-- Item Label
