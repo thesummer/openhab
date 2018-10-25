@@ -4,20 +4,28 @@ rule "Startup"
 when
     System started
 then
-   livingroomTemperatureComfort.sendCommand(21.0)
+   livingroomTemperatureComfort.sendCommand(22.0)
    livingroomTemperatureEco.sendCommand(16.0)
 end
 
 rule "Living room thermostate set state"
 when
-    Item JanOnline changed
+    Time cron "0 30 22 1/1 * ? *" or
+    Time cron "0 30 7 1/1 * ? *"  or
+    Item JanOnline changed or
+    Item livingroomPreheat changed to OFF
 then
-    if (JanOnline.state == OPEN )
+    val turnOffTime = now.withTimeAtStartOfDay.plusHours(22).plusMinutes(30)
+    val turnOnTime  = now.withTimeAtStartOfDay.plusHours(7).plusMinutes(30)
+
+    if (JanOnline.state == OPEN && (now.isAfter(turnOnTime) && now.isBefore(turnOffTime)))
     {
+        logInfo("LVHeaterStateChange", "Set to ON (Jan " + JanOnline.state.toString())
         livingroomHeaterState.sendCommand(ON)
     }
     else
     {
+        logInfo("LVHeaterStateChange", "Set to OFF (Jan " + JanOnline.state.toString())
         livingroomHeaterState.sendCommand(OFF)
     }
 end
@@ -27,51 +35,54 @@ when
     Item livingroomPreheat changed to ON
 then
     livingroomHeaterState.sendCommand(ON)
-    logInfo("PreheatEnable", "Set heater to ON")
+    logInfo("LVPreheatEnable", "Set heater to ON")
     disablePreheatTimer = createTimer(now.plusHours(1),
                        [| livingroomHeaterState.sendCommand(OFF)
                           livingroomPreheat.sendCommand(OFF)
-                          logInfo("PreheatEnable", "Set heater to and switch to OFF") ])
+                          logInfo("LVPreheatEnable", "Set heater and switch to OFF") ])
 end
 
-rule "Living room disable preheat"
-when 
-    Item livingroomPreheat changed to OFF
-then
-    if (JanOnline.state == OPEN )
-    {
-        livingroomHeaterState.sendCommand(ON)
-        logInfo("PreheatDisable", "Setting heater to ON")
-    }
-    else
-    {
-        livingroomHeaterState.sendCommand(OFF)
-        logInfo("PreheatDisable", "Setting heater to OFF")
-    }
-end
+//rule "Living room disable preheat"
+//when 
+//    Item livingroomPreheat changed to OFF
+//then
+//    if (JanOnline.state == OPEN )
+//    {
+//        livingroomHeaterState.sendCommand(ON)
+//        logInfo("PreheatDisable", "Setting heater to ON")
+//    }
+//    else
+//    {
+//        livingroomHeaterState.sendCommand(OFF)
+//        logInfo("PreheatDisable", "Setting heater to OFF")
+//    }
+//end
 
 rule "Living room heater set temperature"
 when
-    Item livingroomHeaterState changed
+    Item livingroomHeaterState changed or
+    Item livingroomTemperatureComfort changed or
+    Item livingroomTemperatureEco changed 
 then
-    logInfo("LivingRoomTemp", "SetLRTemp started...")
+    logInfo("LVSetRoomTemp", "SetLRTemp started...")
     if (livingroomHeaterState.state == ON)
     {
-	logInfo("LivingroomTemp", "Set current set point to " + livingroomTemperatureComfort.state.toString()) 
+	logInfo("LVSetRoomTemp", "Set current set point to " + livingroomTemperatureComfort.state.toString()) 
         living_room_thermostat_SetpointTemperature.sendCommand(livingroomTemperatureComfort.state)
     }
     else
     {
-	logInfo("LivingroomTemp", "Set current set point to " + livingroomTemperatureEco.state.toString()) 
+	logInfo("LVSetRoomTemp", "Set current set point to " + livingroomTemperatureEco.state.toString()) 
         living_room_thermostat_SetpointTemperature.sendCommand(livingroomTemperatureEco.state)
     }
-    logInfo("LivingRoomTemp", "SetLRTemp finished")
+    logInfo("LVSetRoomTemp", "SetLRTemp finished")
 end
 
-rule "LR thermostate night mode"
-when
-    Time cron "0 40 22 1/1 * ? *"
-then
-   logInfo("LRNight", "Set LR temperature to night mode")
-   livingroomHeaterState.sendCommand(OFF) 
-end
+//rule "LR thermostate night mode"
+//when
+//    Time cron "0 40 22 1/1 * ? *"
+//then
+//   logInfo("LRNight", "Set LR temperature to night mode")
+//   livingroomHeaterState.sendCommand(OFF) 
+//end
+
