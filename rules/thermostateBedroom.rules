@@ -33,7 +33,9 @@ end
 
 rule "Bedroom heater set temperature"
 when
-    Item bedroomHeaterState changed
+    Item bedroomHeaterState changed or 
+    Item bedroomTemperatureComfort changed or
+    Item bedroomTemperatureEco changed
 then
     if (bedroomHeaterState.state == ON)
     {
