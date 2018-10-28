@@ -34,7 +34,7 @@ rule "Living room enable preheat"
 when 
     Item livingroomPreheat changed to ON
 then
-    livingroomHeaterState.sendCommand("COMFORT")
+    lrHeaterState.sendCommand("COMFORT")
     logInfo("LVPreheatEnable", "Set heater to COMFORT")
     disablePreheatTimer = createTimer(now.plusHours(1),
                        [| livingroomPreheat.sendCommand(OFF)
@@ -77,12 +77,3 @@ then
         }
     }
 end
-
-//rule "LR thermostate night mode"
-//when
-//    Time cron "0 40 22 1/1 * ? *"
-//then
-//   logInfo("LRNight", "Set LR temperature to night mode")
-//   livingroomHeaterState.sendCommand(OFF) 
-//end
-
