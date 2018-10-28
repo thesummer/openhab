@@ -22,7 +22,7 @@ sitemap default label="Flat"
         Slider item=bedroom_dimmers label="Bedroom brightness" icon="light"
         Slider item=bedroom_colors label="Bedroom colors" icon="light"
         Text item=bedroom_thermostat_CurrentTemperature label="Current temperatur [%.1f °C]"
-        Setpoint item=bedroom_thermostat_SetpointTemperature label="Current setpoint [%.1f °C]" minValue=5 maxValue=30.5 step=1.0 visibility=[bedroom_thermostat_SetpointTemperature > 4.5]
+        Setpoint item=bedroom_thermostat_SetpointTemperature label="Current setpoint [%.1f °C]" minValue=16 maxValue=26 step=1.0 visibility=[brHeaterState == "MANUAL" ]
         Setpoint item=bedroomTemperatureEco label="Setpoint eco temperature [%.1f °C]" minValue=5 maxValue=30.5 step=1.0 icon=temperature
         Setpoint item=bedroomTemperatureComfort label="Setpoint comfort temperature [%.1f °C]" minValue=5 maxValue=30.5 step=1.0 icon=temperature
     }

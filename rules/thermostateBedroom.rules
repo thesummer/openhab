@@ -31,16 +31,6 @@ then
     logInfo("bedroomTempChangeState", "SetBRState finished")
 end
 
-
-rule "Switch to manual"
-when
-    Item bedroom_thermostat_SetpointTemperature changed
-then
-    logInfo("brSwitchToManual", "Setting heater status to manual")
-    brHeaterState.sendCommand("MANUAL")
-    
-end
-
 rule "Bedroom heater set temperature"
 when
     Item brHeaterState changed or 
@@ -52,7 +42,10 @@ then
     switch (brHeaterState.state)
     {
         case "MANUAL": 
+        {
             logInfo("brTemp", "Set current set point to " + bedroomTemperatureComfort.state.toString())
+            
+        }
         case "ECO":
         {
             logInfo("bedroomTemp", "Set current set point to " + bedroomTemperatureEco.state.toString())
