@@ -75,6 +75,7 @@ then
             logInfo("lrTemp", "Set current set point to " + livingroomTemperatureComfort.state.toString())
             living_room_thermostat_SetpointTemperature.sendCommand(livingroomTemperatureComfort.state)
         }
+    }
 end
 
 //rule "LR thermostate night mode"
