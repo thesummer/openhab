@@ -31,6 +31,16 @@ then
     logInfo("bedroomTempChangeState", "SetBRState finished")
 end
 
+
+rule "Switch to manual"
+when
+    Item bedroom_thermostat_SetpointTemperature changed
+then
+    logInfo("brSwitchToManual", "Setting heater status to manual")
+    brHeaterState.sendCommand("MANUAL")
+    
+end
+
 rule "Bedroom heater set temperature"
 when
     Item brHeaterState changed or 
