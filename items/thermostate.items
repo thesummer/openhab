@@ -1,6 +1,6 @@
+String  brHeaterState
+String  brCurrentTemp
 
-Switch bedroomHeaterState "Bedroom heater state"
-
-Switch livingroomHeaterState "Living room heater state"
-
+String  lrHeaterState
+String  lrCurrentTemp
 Switch livingroomPreheat "Living room preheat"
