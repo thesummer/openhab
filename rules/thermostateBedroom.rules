@@ -37,7 +37,7 @@ when
     Item bedroom_thermostat_CurrentTemperature changed
 then
     logInfo("brUpdateTemp", "Updating temperature display")
-    brCurrentTemp.sendCommand(bedroom_thermostat_CurrentTemperature.state.toString() + "°C (" + bedroom_thermostat_SetpointTemperature.state.toString() + "°C)")
+    brCurrentTemp.sendCommand(bedroom_thermostat_CurrentTemperature.state.toString() + " (" + bedroom_thermostat_SetpointTemperature.state.toString() + ")")
 end
 
 rule "Bedroom heater set temperature"
