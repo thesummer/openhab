@@ -20,13 +20,13 @@ then
 
     if (JanOnline.state == OPEN && (now.isAfter(turnOnTime) || now.isBefore(turnOffTime)))
     {
-        logInfo("bedroomTempChangeState", "Setting heater status to ON")
-        bedroomHeaterState.sendCommand(ON)
+        logInfo("bedroomTempChangeState", "Setting heater status to COMFORT")
+        brHeaterState.sendCommand("COMFORT")
     }
     else
     {
-        logInfo("bedroomTempChangeState", "Setting heater status to OFF")
-        bedroomHeaterState.sendCommand(OFF)
+        logInfo("bedroomTempChangeState", "Setting heater status to ECO")
+        bedroomHeaterState.sendCommand("ECO")
     }
     logInfo("bedroomTempChangeState", "SetBRState finished")
 end
@@ -37,19 +37,17 @@ when
     Item bedroomTemperatureComfort changed or
     Item bedroomTemperatureEco changed
 then
+
+    logInfo("brTemp", "Bedroom heater state set to " + brHeaterState.state"
     switch (brHeaterState.state)
     {
     case "MANUAL": 
-        logInfo("brTemp", "Set current set point to " + bedroomTemperatureComfort.state.toString() + brHeaterState.state)
-    }
-    if (bedroomHeaterState.state == ON)
-    {
-        logInfo("bedroomTemp", "Set current set point to " + bedroomTemperatureComfort.state.toString())
-        bedroom_thermostat_SetpointTemperature.sendCommand(bedroomTemperatureComfort.state)
-    }
-    else
-    {
+        logInfo("brTemp", "Set current set point to " + bedroomTemperatureComfort.state.toString())
+    case "ECO":
         logInfo("bedroomTemp", "Set current set point to " + bedroomTemperatureEco.state.toString())
         bedroom_thermostat_SetpointTemperature.sendCommand(bedroomTemperatureEco.state)
+    case "COMFORT"
+        logInfo("bedroomTemp", "Set current set point to " + bedroomTemperatureComfort.state.toString())
+        bedroom_thermostat_SetpointTemperature.sendCommand(bedroomTemperatureComfort.state)
     }
 end
