@@ -18,7 +18,7 @@ sitemap default label="Flat"
     
     Frame label="Bedroom"
     {
-        Switch item=bedroomHeaterState label="Heating" icon=temperature mappings=[ECO="eco", COMFORT="comfort"]
+        Switch item=bedroomHeaterState label="Heating" icon=temperature mappings=["MANUAL"="manual", "ECO"="eco", "COMFORT"="comfort"]
         Slider item=bedroom_dimmers label="Bedroom brightness" icon="light"
         Slider item=bedroom_colors label="Bedroom colors" icon="light"
         Text item=bedroom_thermostat_CurrentTemperature label="Current temperatur [%.1f °C]"

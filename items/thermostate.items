@@ -1,3 +1,5 @@
+String  LRHeaterState
+String  BRHeaterState
 
 Switch bedroomHeaterState "Bedroom heater state"
 
