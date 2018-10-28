@@ -21,12 +21,12 @@ then
     if (JanOnline.state == OPEN && (now.isAfter(turnOnTime) && now.isBefore(turnOffTime)))
     {
         logInfo("LVHeaterStateChange", "Set to COMFORT (Jan " + JanOnline.state.toString())
-        livingroomHeaterState.sendCommand("COMFORT")
+        lrHeaterState.sendCommand("COMFORT")
     }
     else
     {
         logInfo("LVHeaterStateChange", "Set to ECO (Jan " + JanOnline.state.toString())
-        livingroomHeaterState.sendCommand("ECO")
+        lrHeaterState.sendCommand("ECO")
     }
 end
 
