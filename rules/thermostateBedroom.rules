@@ -33,10 +33,15 @@ end
 
 rule "Bedroom heater set temperature"
 when
-    Item bedroomHeaterState changed or 
+    Item brHeaterState changed or 
     Item bedroomTemperatureComfort changed or
     Item bedroomTemperatureEco changed
 then
+    switch (brHeaterState.state)
+    {
+    case "MANUAL": 
+        logInfo("brTemp", "Set current set point to " + bedroomTemperatureComfort.state.toString() + brHeaterState.state)
+    }
     if (bedroomHeaterState.state == ON)
     {
         logInfo("bedroomTemp", "Set current set point to " + bedroomTemperatureComfort.state.toString())
