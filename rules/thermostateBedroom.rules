@@ -57,12 +57,12 @@ then
         }
         case "ECO":
         {
-            logInfo("bedroomTemp", "Set current set point to " + bedroomTemperatureEco.state.toString())
+            logInfo("brTemp", "Set current set point to " + bedroomTemperatureEco.state.toString())
             bedroom_thermostat_SetpointTemperature.sendCommand(bedroomTemperatureEco.state)
         }
         case "COMFORT":
         {
-            logInfo("bedroomTemp", "Set current set point to " + bedroomTemperatureComfort.state.toString())
+            logInfo("brTemp", "Set current set point to " + bedroomTemperatureComfort.state.toString())
             bedroom_thermostat_SetpointTemperature.sendCommand(bedroomTemperatureComfort.state)
         }
     }

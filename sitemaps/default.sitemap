@@ -9,16 +9,17 @@ sitemap default label="Flat"
     
     Frame label="Living Room" 
     {
-        Slider item=living_room_brightness label="Living room" icon="light"
-        Text item=living_room_thermostat_CurrentTemperature label="Current temperatur [%.1f °C]"
+        Switch item=lrHeaterState label="Heating" icon=heating mappings=["MANUAL"="manual", "ECO"="eco",    "COMFORT"="comfort"]
         Setpoint item=living_room_thermostat_SetpointTemperature label="Current setpoint [%.1f °C]" minValue=4.5 maxValue=28 step=1.0 visibility=[living_room_thermostat_SetpointTemperature > 4.5]
+        Text item=brCurrentTemp label="Current temperatur [%s]" icon=temperature
+        Slider item=living_room_brightness label="Living room" icon="light"
     }
     
     Frame label="Bedroom"
     {
         Switch item=brHeaterState label="Heating" icon=heating mappings=["MANUAL"="manual", "ECO"="eco", "COMFORT"="comfort"]
-        Text item=brCurrentTemp label="Current temperatur [%s]" icon=temperature
         Setpoint item=bedroom_thermostat_SetpointTemperature label="Current setpoint [%.1f °C]" minValue=16 maxValue=26 step=1.0 visibility=[brHeaterState == "MANUAL"]
+        Text item=brCurrentTemp label="Current temperatur [%s]" icon=temperature
         Slider item=bedroom_dimmers label="Bedroom brightness" icon="light"
         Slider item=bedroom_colors label="Bedroom colors" icon="light"
     }
