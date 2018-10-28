@@ -31,7 +31,7 @@ then
     logInfo("bedroomTempChangeState", "SetBRState finished")
 end
 
-rule "Update current temperature"
+rule "Update current bedroom temperature"
 when
     Item bedroom_thermostat_SetpointTemperature changed or
     Item bedroom_thermostat_CurrentTemperature changed

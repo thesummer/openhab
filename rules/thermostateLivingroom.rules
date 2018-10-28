@@ -41,7 +41,7 @@ then
                           logInfo("LVPreheatEnable", "Set preheat switch to OFF") ])
 end
 
-rule "Update current temperature"
+rule "Update current living room temperature"
 when
     Item living_room_thermostat_SetpointTemperature changed or
     Item living_room_thermostat_CurrentTemperature changed
