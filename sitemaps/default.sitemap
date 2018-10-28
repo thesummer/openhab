@@ -17,10 +17,10 @@ sitemap default label="Flat"
     Frame label="Bedroom"
     {
         Switch item=brHeaterState label="Heating" icon=heating mappings=["MANUAL"="manual", "ECO"="eco", "COMFORT"="comfort"]
+        Text item=brCurrentTemp label="Current temperatur [%s]"
         Setpoint item=bedroom_thermostat_SetpointTemperature label="Current setpoint [%.1f °C]" minValue=16 maxValue=26 step=1.0 visibility=[brHeaterState == "MANUAL"]
         Slider item=bedroom_dimmers label="Bedroom brightness" icon="light"
         Slider item=bedroom_colors label="Bedroom colors" icon="light"
-        Text item=bedroom_thermostat_CurrentTemperature label="Current temperatur [%.1f °C]"
     }
         
     Frame label="Plant"

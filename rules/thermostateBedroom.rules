@@ -31,6 +31,15 @@ then
     logInfo("bedroomTempChangeState", "SetBRState finished")
 end
 
+rule "Update current temperature"
+when
+    Item bedroom_thermostat_SetpointTemperature changed or
+    Item bedroom_thermostat_CurrentTemperature changed
+then
+    logInfo("brUpdateTemp", "Updating temperature display")
+    brCurrentTemp.sendCommand(bedroom_thermostat_CurrentTemperature.state.toString() + "°C (" + bedroom_thermostat_SetpointTemperature.state.toString() + "°C)")
+end
+
 rule "Bedroom heater set temperature"
 when
     Item brHeaterState changed or 
