@@ -38,7 +38,7 @@ when
     Item bedroomTemperatureEco changed
 then
 
-    logInfo("brTemp", "Bedroom heater state set to " + brHeaterState.state"
+    logInfo("brTemp", "Bedroom heater state set to " + brHeaterState.state)
     switch (brHeaterState.state)
     {
     case "MANUAL": 
