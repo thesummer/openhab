@@ -11,20 +11,16 @@ sitemap default label="Flat"
     {
         Slider item=living_room_brightness label="Living room" icon="light"
         Text item=living_room_thermostat_CurrentTemperature label="Current temperatur [%.1f °C]"
-        Setpoint item=living_room_thermostat_SetpointTemperature label="Current setpoint [%.1f °C]" minValue=4.5 maxValue=30.5 step=1.0 visibility=[living_room_thermostat_SetpointTemperature > 4.5]
-        Setpoint item=livingroomTemperatureEco label="Setpoint eco temperature [%.1f °C]" minValue=5 maxValue=30.5 step=1.0 icon=temperature
-        Setpoint item=livingroomTemperatureComfort label="Setpoint comfort temperature [%.1f °C]" minValue=5 maxValue=30.5 step=1.0 icon=temperature
+        Setpoint item=living_room_thermostat_SetpointTemperature label="Current setpoint [%.1f °C]" minValue=4.5 maxValue=28 step=1.0 visibility=[living_room_thermostat_SetpointTemperature > 4.5]
     }
     
     Frame label="Bedroom"
     {
         Switch item=brHeaterState label="Heating" icon=heating mappings=["MANUAL"="manual", "ECO"="eco", "COMFORT"="comfort"]
+        Setpoint item=bedroom_thermostat_SetpointTemperature label="Current setpoint [%.1f °C]" minValue=16 maxValue=26 step=1.0 visibility=[brHeaterState == "MANUAL"]
         Slider item=bedroom_dimmers label="Bedroom brightness" icon="light"
         Slider item=bedroom_colors label="Bedroom colors" icon="light"
         Text item=bedroom_thermostat_CurrentTemperature label="Current temperatur [%.1f °C]"
-        Setpoint item=bedroom_thermostat_SetpointTemperature label="Current setpoint [%.1f °C]" minValue=16 maxValue=26 step=1.0 visibility=[brHeaterState == "MANUAL" ]
-        Setpoint item=bedroomTemperatureEco label="Setpoint eco temperature [%.1f °C]" minValue=5 maxValue=30.5 step=1.0 icon=temperature
-        Setpoint item=bedroomTemperatureComfort label="Setpoint comfort temperature [%.1f °C]" minValue=5 maxValue=30.5 step=1.0 icon=temperature
     }
         
     Frame label="Plant"
@@ -41,18 +37,18 @@ sitemap default label="Flat"
             Slider item=bedroom_right_brightness label="Right brightness" icon="light" 
             Slider item=bedroom_right_color label="Right color" icon="light"    
             Text item=dimmer_bedroom_battery_level label="Battery bedroom" icon=battery 
-            Setpoint item=bedroom_thermostat_SetpointTemperature label="Current setpoint [%.1f °C]" minValue=5 maxValue=30.5 step=1.0 visibility=[bedroom_thermostat_SetpointTemperature > 4.5]
-            Setpoint item=bedroomTemperatureEco label="Setpoint eco temperature [%.1f °C]" minValue=5 maxValue=30.5 step=1.0 icon=temperature
-            Setpoint item=bedroomTemperatureComfort label="Setpoint comfort temperature [%.1f °C]" minValue=5 maxValue=30.5 step=1.0 icon=temperature
+            Setpoint item=bedroom_thermostat_SetpointTemperature label="Current setpoint [%.1f °C]" minValue=16 maxValue=28 step=1.0
+            Setpoint item=bedroomTemperatureEco label="Setpoint eco temperature [%.1f °C]" minValue=16 maxValue=28 step=1.0 icon=temperature
+            Setpoint item=bedroomTemperatureComfort label="Setpoint comfort temperature [%.1f °C]" minValue=16 maxValue=28 step=1.0 icon=temperature
         }
         
         Text label="Living room" icon=sofa
         {
             Slider item=living_room_brightness label="Living room" icon="light"
             Text item=dimmer_livingroom_battery_level label="Battery living room" icon=battery 
-            Setpoint item=living_room_thermostat_SetpointTemperature label="Current setpoint [%.1f °C]" minValue=4.5 maxValue=30.5 step=1.0 visibility=[living_room_thermostat_SetpointTemperature > 4.5]
-            Setpoint item=livingroomTemperatureEco label="Setpoint eco temperature [%.1f °C]" minValue=5 maxValue=30.5 step=1.0 icon=temperature
-        Setpoint item=livingroomTemperatureComfort label="Setpoint comfort temperature [%.1f °C]" minValue=5 maxValue=30.5 step=1.0 icon=temperature
+            Setpoint item=living_room_thermostat_SetpointTemperature label="Current setpoint [%.1f °C]" minValue=4.5 maxValue=28 step=1.0
+            Setpoint item=livingroomTemperatureEco label="Setpoint eco temperature [%.1f °C]" minValue=16 maxValue=28 step=1.0 icon=temperature
+        Setpoint item=livingroomTemperatureComfort label="Setpoint comfort temperature [%.1f °C]" minValue=16 maxValue=28 step=1.0 icon=temperature
         }
     }
     
