@@ -6,5 +6,5 @@ Strategies {
 }
 
 Items {
-    living_room_thermostat_CurrentTemperature, bedroom_thermostat_CurrentTemperature   : strategy = everyChange, every15Min
+    living_room_thermostat_CurrentTemperature, bedroom_thermostat_CurrentTemperature, bedroom_thermostat_SetpointTemperature, living_room_thermostat_SetpointTemperature   : strategy = everyChange, every15Min
 }
