@@ -1,0 +1,9 @@
+Strategies {
+    everyMinute : "0 * * * * ?"
+    everyHour   : "0 0 * * * ?"
+    everyDay    : "0 0 0 * * ?"
+}
+
+Items {
+    living_room_thermostat_CurrentTemperature, bedroom_thermostat_CurrentTemperature   : strategy = everyChange
+}
