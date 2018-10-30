@@ -14,7 +14,7 @@ rule "Wake up light"
 when
    Time cron "0 45 6 ? * MON-FRI *"
 then
-    logInfro("WakeUp", "WakeUp rule started")
+    logInfo("WakeUp", "WakeUp rule started")
     val stepSize = (100+minutes-1) / minutes
     logInfo("WakeUp", "Initial brightness " + bedroom_left_brightness.state.toString())
     if (WakeupLightEnable.state == ON && bedroom_left_brightness.state == 0) 
