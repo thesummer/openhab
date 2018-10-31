@@ -6,4 +6,6 @@ Number:Temperature brSetpoint "Thermostat temperature set point [%.1f %unit%]" {
 
 String  lrHeaterState
 String  lrCurrentTemp
+Number:Temperature lrSetpoint "Thermostat temperature set point [%.1f %unit%]" { channel="avmfritz:Comet_DECT:ef9daf9e:119590394120:set_temp" }
+
 Switch livingroomPreheat "Living room preheat"
