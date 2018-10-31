@@ -19,13 +19,16 @@
 #
 #--------------------------------------
 import smbus
+import json
+import sys
 import time
+import requests
 from ctypes import c_short
 from ctypes import c_byte
 from ctypes import c_ubyte
 
 DEVICE = 0x76 # Default device I2C address
-IP = "192.168.0.24"        # The IP of the machine hosting your influxdb instance
+IP = "192.168.178.24"        # The IP of the machine hosting your influxdb instance
 DB = "iot"               # The database to write to, has to exist
 USER = "openhab"             # The influxdb user to authenticate with
 PASSWORD = "qwertz123"  # The password of that user
@@ -168,19 +171,31 @@ def main():
   print "Chip ID     :", chip_id
   print "Version     :", chip_version
 
-  temperature,pressure,humidity = readBME280All()
-
-  print "Temperature : ", temperature, "C"
-  print "Pressure : ", pressure, "hPa"
-  print "Humidity : ", humidity, "%"
-
-  v = 'kitchen_temp value=%s' % temperature)
-  r = requests.post("http://%s:8086/write?db=%s" %(IP, DB), auth=(USER, PASSWORD), data=v)
-  if r.status_code != 204:
-    print '[ERROR] Failed to add temperature to influxdb (%d)' %r.status_code
-
-  sleep(5*60)
-  
+  while(True):
+    
+    temperature,pressure,humidity = readBME280All()
+    
+#    print "Temperature : ", temperature, "C"
+#    print "Pressure : ", pressure, "hPa"
+#    print "Humidity : ", humidity, "%"
+    
+    v = 'kitchen_temp value=%s' % temperature
+    r = requests.post("http://%s:8086/write?db=%s" %(IP, DB), auth=(USER, PASSWORD), data=v)
+    if r.status_code != 204:
+      print '[ERROR] Failed to add temperature to influxdb (%d)' %r.status_code
+    
+    v = 'plant_humidity value=%s' % humidity
+    r = requests.post("http://%s:8086/write?db=%s" %(IP, DB), auth=(USER, PASSWORD), data=v)
+    if r.status_code != 204:
+      print '[ERROR] Failed to add humidity to influxdb (%d)' %r.status_code
+ 
+    v = 'plant_pressure value=%s' % pressure
+    r = requests.post("http://%s:8086/write?db=%s" %(IP, DB), auth=(USER, PASSWORD), data=v)
+    if r.status_code != 204:
+      print '[ERROR] Failed to add pressure to influxdb (%d)' %r.status_code
+ 
+    time.sleep(5*60)
+ 
   
 if __name__=="__main__":
    main()
