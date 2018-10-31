@@ -25,6 +25,12 @@ from ctypes import c_byte
 from ctypes import c_ubyte
 
 DEVICE = 0x76 # Default device I2C address
+IP = "192.168.0.24"        # The IP of the machine hosting your influxdb instance
+DB = "iot"               # The database to write to, has to exist
+USER = "openhab"             # The influxdb user to authenticate with
+PASSWORD = "qwertz123"  # The password of that user
+TIME = 1                  # Delay in seconds between two consecutive updates
+STATUS_MOD = 5 
 
 
 bus = smbus.SMBus(1) # Rev 2 Pi, Pi 2 & Pi 3 uses bus 1
@@ -124,7 +130,8 @@ def readBME280All(addr=DEVICE):
   hum_raw = (data[6] << 8) | data[7]
 
   #Refine temperature
-  var1 = ((((temp_raw>>3)-(dig_T1<<1)))*(dig_T2)) >> 11  var2 = (((((temp_raw>>4) - (dig_T1)) * ((temp_raw>>4) - (dig_T1))) >> 12) * (dig_T3)) >> 14
+  var1 = ((((temp_raw>>3)-(dig_T1<<1)))*(dig_T2)) >> 11
+  var2 = (((((temp_raw>>4) - (dig_T1)) * ((temp_raw>>4) - (dig_T1))) >> 12) * (dig_T3)) >> 14
   t_fine = var1+var2
   temperature = float(((t_fine * 5) + 128) >> 8);
 
@@ -167,5 +174,13 @@ def main():
   print "Pressure : ", pressure, "hPa"
   print "Humidity : ", humidity, "%"
 
+  v = 'kitchen_temp value=%s' % temperature)
+  r = requests.post("http://%s:8086/write?db=%s" %(IP, DB), auth=(USER, PASSWORD), data=v)
+  if r.status_code != 204:
+    print '[ERROR] Failed to add temperature to influxdb (%d)' %r.status_code
+
+  sleep(5*60)
+  
+  
 if __name__=="__main__":
    main()
