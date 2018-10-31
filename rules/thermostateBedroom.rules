@@ -33,11 +33,11 @@ end
 
 rule "Update current bedroom temperature"
 when
-    Item bedroom_thermostat_SetpointTemperature changed or
+    Item brSetpoint changed or
     Item bedroom_thermostat_CurrentTemperature changed
 then
     logInfo("brUpdateTemp", "Updating temperature display")
-    brCurrentTemp.sendCommand(bedroom_thermostat_CurrentTemperature.state.toString() + " (" + bedroom_thermostat_SetpointTemperature.state.toString() + ")")
+    brCurrentTemp.sendCommand(bedroom_thermostat_CurrentTemperature.state.toString() + " (" + brSetpoint.state.toString() + ")")
 end
 
 rule "Bedroom heater set temperature"
@@ -58,12 +58,12 @@ then
         case "ECO":
         {
             logInfo("brTemp", "Set current set point to " + bedroomTemperatureEco.state.toString())
-            bedroom_thermostat_SetpointTemperature.sendCommand(bedroomTemperatureEco.state)
+            brSetpoint.sendCommand(bedroomTemperatureEco.state)
         }
         case "COMFORT":
         {
             logInfo("brTemp", "Set current set point to " + bedroomTemperatureComfort.state.toString())
-            bedroom_thermostat_SetpointTemperature.sendCommand(bedroomTemperatureComfort.state)
+            brSetpoint.sendCommand(bedroomTemperatureComfort.state)
         }
     }
 end
