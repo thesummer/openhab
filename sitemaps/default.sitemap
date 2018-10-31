@@ -18,7 +18,7 @@ sitemap default label="Flat"
     Frame label="Bedroom"
     {
         Switch item=brHeaterState label="Heating" icon=heating mappings=["MANUAL"="manual", "ECO"="eco", "COMFORT"="comfort"]
-        Setpoint item=bedroom_thermostat_SetpointTemperature label="Current setpoint [%.1f °C]" minValue=16 maxValue=26 step=1.0 visibility=[brHeaterState == "MANUAL"]
+        Setpoint item=brSetpoint label="Current setpoint [%.1f °C]" minValue=16 maxValue=26 step=1.0 visibility=[brHeaterState == "MANUAL"]
         Text item=brCurrentTemp label="Current temperatur [%s]" icon=temperature
         Slider item=bedroom_dimmers label="Bedroom brightness" icon="light"
         Slider item=bedroom_colors label="Bedroom colors" icon="light"
@@ -38,7 +38,7 @@ sitemap default label="Flat"
             Slider item=bedroom_right_brightness label="Right brightness" icon="light" 
             Slider item=bedroom_right_color label="Right color" icon="light"    
             Text item=dimmer_bedroom_battery_level label="Battery bedroom" icon=battery 
-            Setpoint item=bedroom_thermostat_SetpointTemperature label="Current setpoint [%.1f °C]" minValue=16 maxValue=28 step=1.0
+            Setpoint item=brSetpoint label="Current setpoint [%.1f °C]" minValue=16 maxValue=28 step=1.0
             Setpoint item=bedroomTemperatureEco label="Setpoint eco temperature [%.1f °C]" minValue=16 maxValue=28 step=1.0 icon=temperature
             Setpoint item=bedroomTemperatureComfort label="Setpoint comfort temperature [%.1f °C]" minValue=16 maxValue=28 step=1.0 icon=temperature
         }
