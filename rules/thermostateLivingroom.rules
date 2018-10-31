@@ -43,11 +43,11 @@ end
 
 rule "Update current living room temperature"
 when
-    Item living_room_thermostat_SetpointTemperature changed or
+    Item lrSetpoint changed or
     Item living_room_thermostat_CurrentTemperature changed
 then
     logInfo("lrUpdateTemp", "Updating temperature display")
-    lrCurrentTemp.sendCommand(living_room_thermostat_CurrentTemperature.state.toString() + " (" + living_room_thermostat_SetpointTemperature.state.toString() + ")")
+    lrCurrentTemp.sendCommand(living_room_thermostat_CurrentTemperature.state.toString() + " (" + lrSetpoint.state.toString() + ")")
 end
 
 
@@ -68,12 +68,12 @@ then
         case "ECO":
         {
             logInfo("lrTemp", "Set current set point to " + livingroomTemperatureEco.state.toString())
-            living_room_thermostat_SetpointTemperature.sendCommand(livingroomTemperatureEco.state)
+            lrSetpoint.sendCommand(livingroomTemperatureEco.state)
         }
         case "COMFORT":
         {
             logInfo("lrTemp", "Set current set point to " + livingroomTemperatureComfort.state.toString())
-            living_room_thermostat_SetpointTemperature.sendCommand(livingroomTemperatureComfort.state)
+            lrSetpoint.sendCommand(livingroomTemperatureComfort.state)
         }
     }
 end
