@@ -52,4 +52,11 @@ sitemap default label="Flat"
         Setpoint item=livingroomTemperatureComfort label="Setpoint comfort temperature [%.1f °C]" minValue=16 maxValue=28 step=1.0 icon=temperature
         }
     }
+    Frame label="Others"
+    {
+        Text label="Test"
+        {
+            Webview url="http://192.168.178.24:3000/static/temperatures.html" height=33
+        }
+    }
 }
