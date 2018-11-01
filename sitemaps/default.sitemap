@@ -56,7 +56,8 @@ sitemap default label="Flat"
     {
         Text label="Test"
         {
-            Webview url="http://192.168.178.24:3000/static/temperatures.html" height=33
+            Webview url="http://192.168.178.24:3000/dashboard-solo/db/temperatures?orgId=1&from=now-24h&to=now&panelId=1&theme=light" height=10
+
         }
     }
 }
