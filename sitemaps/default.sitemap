@@ -58,7 +58,7 @@ sitemap default label="Flat"
         {
             Webview url="http://192.168.178.24:3000/dashboard-solo/db/temperatures?orgId=1&from=now-24h&to=now&panelId=1&theme=light" height=10
             
-            Webview url="http://192.168.178.24:3000/dashboard/db/temperatures?orgId=1&from=now-24h&to=now&panelId=1&theme=light" height=10
+            Webview url="http://192.168.178.24:3000/dashboard/db/temperatures?orgId=1&from=now-24h&to=now&panelId=2&theme=light" height=10
         }
     }
 }
