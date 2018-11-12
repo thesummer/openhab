@@ -58,6 +58,10 @@ when
     Item livingroomTemperatureEco changed 
 then
     logInfo("lrTemp", "Livingroom heater state set to " + lrHeaterState.state)
+    if (lrSetpoint === null)
+    {
+        logInfo("lrTemp", "lrSetpoint is null")
+    }
     switch (lrHeaterState.state)
     {
         case "MANUAL": 
@@ -68,12 +72,12 @@ then
         case "ECO":
         {
             logInfo("lrTemp", "Set current set point to " + livingroomTemperatureEco.state.toString())
-            lrSetpoint.sendCommand(livingroomTemperatureEco.state)
+            lrSetpoint.sendCommand(livingroomTemperatureEco.state.toString())
         }
         case "COMFORT":
         {
             logInfo("lrTemp", "Set current set point to " + livingroomTemperatureComfort.state.toString())
-            lrSetpoint.sendCommand(livingroomTemperatureComfort.state)
+            lrSetpoint.sendCommand(livingroomTemperatureComfort.state.toString())
         }
     }
 end
