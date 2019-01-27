@@ -1,0 +1,40 @@
+
+val String filename = "lrLed.rules"
+var Number ledWhite
+ 
+rule "System startup"
+when
+    System started
+then
+    /*Initial value of dimmer*/
+    ww=0
+end
+ 
+/* rule "HSB+CW -> ww"
+when
+    Item lrWhiteDimmer received command
+then
+    logInfo(filename, "Command received: " + receivedCommand)
+    ww = ((lrWhiteDimmer.state as Number) * 255 / 100).intValue
+    logInfo(filename, "Output Conversion: ww" + ww)
+    var rgbw = String.format("000000%02x00", ww)
+    logInfo(filename, "Output Conversion: rgbw" + rgbw)
+    lrColorLedString.sendCommand(rgbw)
+end
+*/
+
+rule "HSB+CW -> RGB"
+when
+    Item lrColorHsb received command or
+    Item lrWhiteDimmer received command
+then
+    logInfo(filename, "Command received: " + receivedCommand)
+    var r = ((lrColorHsb.state as HSBType).getRed * 255 / 100).intValue
+    var g = ((lrColorHsb.state as HSBType).getGreen * 255 / 100).intValue
+    var b = ((lrColorHsb.state as HSBType).getBlue * 255 / 100).intValue
+    ww = ((lrWhiteDimmer.state as Number) * 255 / 100).intValue
+    logInfo(filename, "Output Conversion: r" + r + " g" + g + " b" + b)
+    var rgbw = String.format("%02x%02x%02x%02x00", r, g, b, ww)
+    logInfo(filename, "Output Conversion: rgbw" + rgbw)
+    lrColorLedString.sendCommand(rgbw)
+end
