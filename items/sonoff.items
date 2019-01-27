@@ -8,4 +8,9 @@ Switch Plant_Light_Reachable "Plant Light: reachable" (gReachable)
 Number Plant_Light_RSSI "Plant Light: RSSI [%d %%]" (gRSSI)
     { mqtt="<[broker:tele/plant-_light/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 
+String lrColorLedString "Color RGBW hex [0x%s]" <colorlight> (LR, gLight)
+    {mqtt=">[mosquitto:cmnd/h801/COLOR:command:*:default],<[mosquitto:stat/h801/RESULT:state:default]"}//,autoupdate="false"}
+
+Color  lrColorHsb "Color HSB"    <colorlight>
+Dimmer lrWhiteDimmer "Dimmer Warm White"  <light> (LR, lr_dimmers)
 
