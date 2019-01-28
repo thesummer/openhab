@@ -1,6 +1,6 @@
 
 val String filename = "lrLed.rules"
-var Number ledWhite
+var Number ww
  
 rule "System startup"
 when
