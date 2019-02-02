@@ -12,8 +12,10 @@ sitemap default label="Flat"
         Switch item=lrHeaterState label="Heating" icon=heating mappings=["MANUAL"="manual", "ECO"="eco",    "COMFORT"="comfort"]
         Setpoint item=lrSetpoint label="Current setpoint [%.1f °C]" minValue=16 maxValue=28 step=1.0 visibility=[lrHeaterState == "MANUAL"]
         Text item=lrCurrentTemp label="Current temperatur [%s]" icon=temperature
+        Switch item=lr_light_power label="Light Power" icon=light
         Slider item=lr_dimmers label="Living room" icon="light"
         Colorpicker item=lrColorHsb label="Living Room Color" icon="colorwheel"
+        Slider item=lrLedWhiteDimmer label="Led White" icon="light"
     }
     
     Frame label="Bedroom"

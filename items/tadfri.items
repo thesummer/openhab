@@ -1,5 +1,6 @@
+//Group lr_light_power
 Group lr_dimmers
-Dimmer living_room_brightness "Living room brightness" (lr_dimmers) { channel="tradfri:0100:ede9061e:65543:brightness" }
+Dimmer living_room_brightness "Living room brightness" (lr_dimmers, lr_light_power) { channel="tradfri:0100:ede9061e:65543:brightness" }
 
 Group bedroom_dimmers
 Dimmer bedroom_left_brightness "Bedroom left brightness" (bedroom_dimmers) { channel="tradfri:0220:ede9061e:65541:brightness" }
