@@ -34,8 +34,8 @@ def main():
     
     global callBackEvent
     pi = pigpio.pi()
-    pi.set_mode(20, pigpio.OUTPUT)
-    pi.set_mode(21, pigpio.INPUT)
+    pi.set_mode(24, pigpio.OUTPUT)
+    pi.set_mode(23, pigpio.INPUT)
     cb = pi.callback(21, pigpio.EITHER_EDGE, cbf)
 
     while True:
