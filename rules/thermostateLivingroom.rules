@@ -11,7 +11,7 @@ end
 rule "Living room thermostate set state"
 when
     Time cron "0 30 22 1/1 * ? *" or
-    Time cron "0 30 7 1/1 * ? *"  or
+    Time cron "0 45 8 1/1 * ? *"  or
     Item JanOnline changed or
     Item livingroomPreheat changed to OFF
 then
