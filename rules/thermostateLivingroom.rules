@@ -4,8 +4,11 @@ rule "Startup"
 when
     System started
 then
-   livingroomTemperatureComfort.sendCommand(22.0)
+   logInfo("LVStart", "Initializing Living Room Heater Rule")
+   livingroomTemperatureComfort.sendCommand(23.0)
    livingroomTemperatureEco.sendCommand(16.0)
+   logInfo("LVStart", "EcoTemp: " + livingroomTemperatureEco.state.toString())
+   logInfo("LVStart", "ComfortTemp: " + livingroomTemperatureComfort.state.toString())
 end
 
 rule "Living room thermostate set state"
