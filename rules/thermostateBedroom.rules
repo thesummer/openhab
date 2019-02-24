@@ -3,6 +3,7 @@ rule "Bedroom default"
 when
     System started
 then
+    logInfo("bedroomTempInitializing", "SetBR temperatures starting...")
     bedroomTemperatureComfort.sendCommand(19.0)
     bedroomTemperatureEco.sendCommand(16.0)
 end
