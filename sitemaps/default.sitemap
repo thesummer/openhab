@@ -13,7 +13,7 @@ sitemap default label="Flat"
         Setpoint item=lrSetpoint label="Current setpoint [%.1f °C]" minValue=16 maxValue=28 step=1.0 visibility=[lrHeaterState == "MANUAL"]
         Text item=lrCurrentTemp label="Current temperatur [%s]" icon=temperature
         Switch item=lr_light_power label="Light Power" icon=light
-        Slider item=lr_dimmers label="Living room" icon="light"
+        Slider item=lr_brightness label="Living room" icon="light"
         Colorpicker item=lrColorHsb label="Living Room Color" icon="colorwheel"
         Slider item=lrLedWhiteDimmer label="Led White" icon="light"
     }
@@ -23,8 +23,8 @@ sitemap default label="Flat"
         Switch item=brHeaterState label="Heating" icon=heating mappings=["MANUAL"="manual", "ECO"="eco", "COMFORT"="comfort"]
         Setpoint item=brSetpoint label="Current setpoint [%.1f °C]" minValue=16 maxValue=26 step=1.0 visibility=[brHeaterState == "MANUAL"]
         Text item=brCurrentTemp label="Current temperatur [%s]" icon=temperature
-        Slider item=bedroom_dimmers label="Bedroom brightness" icon="light"
-        Slider item=bedroom_colors label="Bedroom colors" icon="light"
+        Slider item=bedroom_brightness label="Bedroom brightness" icon="light"
+        Slider item=bedroom_color label="Bedroom colors" icon="light"
     }
         
     Frame label="Plant"
