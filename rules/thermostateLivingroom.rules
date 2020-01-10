@@ -5,10 +5,10 @@ when
     System started
 then
    logInfo("LVStart", "Initializing Living Room Heater Rule")
-   livingroomTemperatureComfort.sendCommand(23.0)
-   livingroomTemperatureEco.sendCommand(16.0)
-   logInfo("LVStart", "EcoTemp: " + livingroomTemperatureEco.state.toString())
-   logInfo("LVStart", "ComfortTemp: " + livingroomTemperatureComfort.state.toString())
+   lrTemperatureComfort.sendCommand(23.0)
+   lrTemperatureEco.sendCommand(16.0)
+   logInfo("LVStart", "EcoTemp: " + lrTemperatureEco.state.toString())
+   logInfo("LVStart", "ComfortTemp: " + lrTemperatureComfort.state.toString())
 end
 
 rule "Living room thermostate set state"
@@ -47,18 +47,18 @@ end
 rule "Update current living room temperature"
 when
     Item lrSetpoint changed or
-    Item living_room_thermostat_CurrentTemperature changed
+    Item lrCurrentTemperature changed
 then
     logInfo("lrUpdateTemp", "Updating temperature display")
-    lrCurrentTemp.sendCommand(living_room_thermostat_CurrentTemperature.state.toString() + " (" + lrSetpoint.state.toString() + ")")
+    lrCurrentTemp.sendCommand(lrCurrentTemperature.state.toString() + " (" + lrSetpoint.state.toString() + ")")
 end
 
 
 rule "Living room heater set temperature"
 when
     Item lrHeaterState changed or
-    Item livingroomTemperatureComfort changed or
-    Item livingroomTemperatureEco changed 
+    Item lrTemperatureComfort changed or
+    Item lrTemperatureEco changed 
 then
     logInfo("lrTemp", "Livingroom heater state set to " + lrHeaterState.state)
     if (lrSetpoint === null)
@@ -69,18 +69,18 @@ then
     {
         case "MANUAL": 
         {
-            logInfo("lrTemp", "Set current set point to " + livingroomTemperatureComfort.state.toString())
+            logInfo("lrTemp", "Set current set point to " + lrTemperatureComfort.state.toString())
             
         }
         case "ECO":
         {
-            logInfo("lrTemp", "Set current set point to " + livingroomTemperatureEco.state.toString())
-            lrSetpoint.sendCommand(livingroomTemperatureEco.state.toString())
+            logInfo("lrTemp", "Set current set point to " + lrTemperatureEco.state.toString())
+            lrSetpoint.sendCommand(lrTemperatureEco.state.toString())
         }
         case "COMFORT":
         {
-            logInfo("lrTemp", "Set current set point to " + livingroomTemperatureComfort.state.toString())
-            lrSetpoint.sendCommand(livingroomTemperatureComfort.state.toString())
+            logInfo("lrTemp", "Set current set point to " + lrTemperatureComfort.state.toString())
+            lrSetpoint.sendCommand(lrTemperatureComfort.state.toString())
         }
     }
 end

@@ -1,4 +1,4 @@
-//Group lr_light_power
+// Group in PaperUI: Group:Switch:AND(OFF,ON) lr_light_power
 Group lr_dimmers
 Dimmer lr_brightness "Living room brightness" (lr_dimmers, lr_light_power) { channel="tradfri:0100:gwb8d7af2bc5bb:65543:brightness" }
 
@@ -12,4 +12,4 @@ Number dimmer_bedroom_battery_level "Dimmer bedroom battery level [%d %%]" { cha
 
 Number dimmer_livingroom_battery_level "Dimmer living room battery level [%d %%]" { channel="tradfri:0820:gwb8d7af2bc5bb:65537:battery_level" }
 
-Switch WakeupLightEnable "Wake-up light" 
+Switch WakeupLightEnable "Wake-up light"

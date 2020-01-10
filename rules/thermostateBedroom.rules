@@ -4,8 +4,8 @@ when
     System started
 then
     logInfo("bedroomTempInitializing", "SetBR temperatures starting...")
-    bedroomTemperatureComfort.sendCommand(19.0)
-    bedroomTemperatureEco.sendCommand(16.0)
+    brTemperatureComfort.sendCommand(19.0)
+    brTemperatureEco.sendCommand(16.0)
 end
 
 rule "Bedroom thermostate set state"
@@ -35,17 +35,17 @@ end
 rule "Update current bedroom temperature"
 when
     Item brSetpoint changed or
-    Item bedroom_thermostat_CurrentTemperature changed
+    Item brCurrentTemperature changed
 then
     logInfo("brUpdateTemp", "Updating temperature display")
-    brCurrentTemp.sendCommand(bedroom_thermostat_CurrentTemperature.state.toString() + " (" + brSetpoint.state.toString() + ")")
+    brCurrentTemp.sendCommand(brCurrentTemperature.state.toString() + " (" + brSetpoint.state.toString() + ")")
 end
 
 rule "Bedroom heater set temperature"
 when
     Item brHeaterState changed or 
-    Item bedroomTemperatureComfort changed or
-    Item bedroomTemperatureEco changed
+    Item brTemperatureComfort changed or
+    Item brTemperatureEco changed
 then
 
     logInfo("brTemp", "Bedroom heater state set to " + brHeaterState.state)
@@ -53,18 +53,18 @@ then
     {
         case "MANUAL": 
         {
-            logInfo("brTemp", "Set current set point to " + bedroomTemperatureComfort.state.toString())
+            logInfo("brTemp", "Set current set point to " + brTemperatureComfort.state.toString())
             
         }
         case "ECO":
         {
-            logInfo("brTemp", "Set current set point to " + bedroomTemperatureEco.state.toString())
-            brSetpoint.sendCommand(bedroomTemperatureEco.state.toString())
+            logInfo("brTemp", "Set current set point to " + brTemperatureEco.state.toString())
+            brSetpoint.sendCommand(brTemperatureEco.state.toString())
         }
         case "COMFORT":
         {
-            logInfo("brTemp", "Set current set point to " + bedroomTemperatureComfort.state.toString())
-            brSetpoint.sendCommand(bedroomTemperatureComfort.state.toString())
+            logInfo("brTemp", "Set current set point to " + brTemperatureComfort.state.toString())
+            brSetpoint.sendCommand(brTemperatureComfort.state.toString())
         }
     }
 end

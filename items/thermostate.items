@@ -1,11 +1,17 @@
+// Eco and Comfort channels of Dect are read-only
 String  brHeaterState
 String  brCurrentTemp
-Number:Temperature brSetpoint "Thermostat temperature set point [%.1f %unit%]" { channel="avmfritz:Comet_DECT:ef9daf9e:119600737984:set_temp" }
-
+Number:Temperature brSetpoint "Thermostat temperature set point [%.1f %unit%]" { channel="avmfritz:Comet_DECT:192_168_178_1:119600737984:set_temp" }
+Number:Temperature brCurrentTemperature "Thermostat current temperature [%.1f %unit%]" { channel="avmfritz:Comet_DECT:192_168_178_1:119600737984:temperature" }
+Number:Temperature brTemperatureComfort "Thermostat temperature comfort [%.1f %unit%]" 
+Number:Temperature brTemperatureEco "Thermostat temperature eco  [%.1f %unit%]" 
 
 
 String  lrHeaterState
 String  lrCurrentTemp
-Number:Temperature lrSetpoint "Thermostat temperature set point [%.1f %unit%]" { channel="avmfritz:Comet_DECT:ef9daf9e:119590394120:set_temp" }
+Number:Temperature lrSetpoint "Thermostat temperature set point [%.1f %unit%]" { channel="avmfritz:Comet_DECT:192_168_178_1:119590394120:set_temp" }
+Number:Temperature lrCurrentTemperature "Thermostat current temperature [%.1f %unit%]" { channel="avmfritz:Comet_DECT:192_168_178_1:119590394120:temperature" }
+Number:Temperature lrTemperatureComfort "Thermostat temperature comfort [%.1f %unit%]" 
+Number:Temperature lrTemperatureEco "Thermostat temperature eco  [%.1f %unit%]" 
 
 Switch livingroomPreheat "Living room preheat"

@@ -1,3 +1,0 @@
-Color  lrColorHsb "Color HSB"    <colorlight> (lr_light_power)
-Dimmer lrLedWhiteDimmer "Dimmer Warm White"  <light> (LR, lr_dimmers, lr_light_power)
-
